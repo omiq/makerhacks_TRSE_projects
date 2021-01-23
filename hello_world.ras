@@ -1,0 +1,38 @@
+program Hello_World;
+var
+	
+@include "beeb_constants.ras"
+
+@include "textmode.ras"
+
+begin
+
+	// Clear acreen
+	cls();							
+	
+	// Set to 4x colour screen mode, 40x25
+	screen_mode(1);					
+
+	// Yellow
+	text_colour(2);		
+	
+	// Print with no return			
+	print_string("Hello BBC Micro! ", False);		
+
+	// Red
+	text_colour(1);
+	
+	// Print with carriage return and linefeed					
+	print_string("Hello World!", True);
+
+	// Wait for a keypress
+	wait_key();
+	
+	// Clear acreen
+	cls();
+	
+	// White
+	text_colour(3);	
+	print_string("Done!", True);				
+	
+end.

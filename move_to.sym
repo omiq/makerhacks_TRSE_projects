@@ -1,0 +1,22 @@
+; labels
+al  $1100 .StartBlock1100
+al  $1103 .cls
+al  $110e ._text_x
+al  $110f ._text_y
+al  $1110 .move_to_block3
+al  $1122 .selected_mode
+al  $1123 .screen_mode_block4
+al  $112f ._chosen_text_colour
+al  $1130 .text_colour_block5
+al  $113c .ch
+al  $113d .next_ch
+al  $113e .CRLF
+al  $113f .print_string_block6
+al  $1144 .print_string_while7
+al  $114d .print_string_ConditionalTrueBlock8
+al  $115e .print_string_elsedoneblock10
+al  $1165 .print_string_ConditionalTrueBlock18
+al  $1168 .print_string_elsedoneblock20
+al  $1169 .block1
+al  $1197 .EndBlock1100
+; breakpoints

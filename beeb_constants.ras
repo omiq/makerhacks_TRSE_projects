@@ -1,0 +1,9 @@
+	// Address Locations of operating system functions
+	const	OSBYTE: address =  $FFF4; // Entry point for OSBYTE http://beebwiki.mdfs.net/OSBYTE
+	const 	OSWRCH: address =  $FFEE; // Print the char in accumulator 
+	const 	OSNEWL: address =  $FFE7; // Newline carriage return + new line
+	const 	OSASCI: address =  $FFE3; // Print text + CRNL at ch13 in string
+	const	CRTC_V: address =  $FE00; // Video controller register
+	const	SCR_MO: address =  $FE20; // screen mode register 
+	const	OSRDCH: address =  $FFE0; // Read Character
+	const	CUR_OF: address =  $FE01; // Cursor off
