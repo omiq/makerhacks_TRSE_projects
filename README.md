@@ -33,11 +33,6 @@ usage:
 
 	procedure screen_mode(selected_mode:byte);
 
-	procedure mode_1();
-	procedure red();
-
-	procedure yellow();
-
 	procedure text_colour(_chosen_text_colour: byte);
 
 	procedure get_ch(show_ch: byte = False);
