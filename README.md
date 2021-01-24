@@ -3,7 +3,7 @@
 ## BBC Text Mode unit
 
 usage:
-```@use textmode```
+```@use "textmode"```
 
 ### Constants
 
