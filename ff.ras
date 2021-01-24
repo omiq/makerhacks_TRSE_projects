@@ -1,86 +1,86 @@
 program ff;
 var  
-   i,x,y,w: byte =0; 
-@include "beeb_constants.ras"
+@use "textmode"
 
-@include "textmode.ras"
+   i,x,y,w: byte =0; 
+
 
 begin
 	// Set to 20 column, 16 colour mode
-	screen_mode(2);					
+	BBC_Textmode::screen_mode(2);					
 
 	// Clear acreen
-	cls();						
+	BBC_Textmode::cls();						
 	
 	// No flashing cursor
-	cursor_off();
+	BBC_Textmode::cursor_off();
 
 	// infinite loop
 	while (true) do
 	begin
-		print_string("                               ",False);
+		BBC_Textmode::print_string("                               ",False);
 		incrange(i,0,48);
-		text_colour(i);
+		BBC_Textmode::text_colour(i);
 		
 		x:=0;
 		y:=random()/10;
 
-		move_to(x,y);
+		BBC_Textmode::move_to(x,y);
 		case i of
-			0:	print_string("@MOS_8502",False);
-			1:	print_string("@futurewas8bit",False);
-			2:	print_string("@10MARC1",False);
-			3:	print_string("@JohnKennedyMSFT",False);
-			4:	print_string("@6502nerd",False);
-			5:	print_string("@LifeBegins8bit",False);
-			6:	print_string("@CodingAndThings",False);
-			7:	print_string("@MonstersGo",False);
-			8:	print_string("@bbcmicrobot",False);
-			9:	print_string("@geoff_suniga",False);
-			10:	print_string("@0xC0DE6502",False);
-			11:	print_string("@3DPProfessor",False);
-			12:	print_string("@ZxSpectROM",False);
-			13:	print_string("@Hewco64",False);
-			14:	print_string("@NickT6630",False);
-			15:	print_string("@BillieRubenMake",False);
-			16:	print_string("@MikeDancy",False);
-			17:	print_string("@AmethystAnswers",False);
-			18:	print_string("@jimblimey",False);
-			19:	print_string("@Barnacules",False);
-			20:	print_string("@electron_greg",False);
-			21:	print_string("@JCTrick",False);
-			22:	print_string("@joeltelling",False);
-			23:	print_string("@JAYTEEAU",False);
-			24:	print_string("@Lord_Arse",False);
-			25:	print_string("@BreakIntoProg",False);
-			26:	print_string("@leelegionsmith",False);
-			27:	print_string("@particlesbbs",False);
-			28:	print_string("@DeathStarPR",False);
-			29:	print_string("@kcimc",False);
-			30:	print_string("@susie_dent",False);
-			31:	print_string("@FriendlyWire",False);
-			32:	print_string("@Foone",False);
-			33:	print_string("@8bit_era",False);
-			34:	print_string("@TheReaperUK",False);
-			35:	print_string("@drkninja2k5",False);
-			36:	print_string("@setlahs",False);
-			37:	print_string("@ZZleeZZ",False);
-			38:	print_string("@8bitAlan",False);
-			39:	print_string("@news_xc",False);
-			40:	print_string("@SharpworksMZ",False);
-			41:	print_string("@_fabdigital_",False);
-			42:	print_string("@AshtonNorman6",False);
-			43:	print_string("@textfiles",False);
-			44:	print_string("@maded2",False);
-			45:	print_string("@KevEdwardsRetro",False);
-			46:	print_string("@ghidraninja",False);
-			47:	print_string("@chrispian",False);
-			48:	print_string("@DocPop",False);
+			0:	BBC_Textmode::print_string("@MOS_8502",False);
+			1:	BBC_Textmode::print_string("@futurewas8bit",False);
+			2:	BBC_Textmode::print_string("@10MARC1",False);
+			3:	BBC_Textmode::print_string("@JohnKennedyMSFT",False);
+			4:	BBC_Textmode::print_string("@6502nerd",False);
+			5:	BBC_Textmode::print_string("@LifeBegins8bit",False);
+			6:	BBC_Textmode::print_string("@CodingAndThings",False);
+			7:	BBC_Textmode::print_string("@MonstersGo",False);
+			8:	BBC_Textmode::print_string("@bbcmicrobot",False);
+			9:	BBC_Textmode::print_string("@geoff_suniga",False);
+			10:	BBC_Textmode::print_string("@0xC0DE6502",False);
+			11:	BBC_Textmode::print_string("@3DPProfessor",False);
+			12:	BBC_Textmode::print_string("@ZxSpectROM",False);
+			13:	BBC_Textmode::print_string("@Hewco64",False);
+			14:	BBC_Textmode::print_string("@NickT6630",False);
+			15:	BBC_Textmode::print_string("@BillieRubenMake",False);
+			16:	BBC_Textmode::print_string("@MikeDancy",False);
+			17:	BBC_Textmode::print_string("@AmethystAnswers",False);
+			18:	BBC_Textmode::print_string("@jimblimey",False);
+			19:	BBC_Textmode::print_string("@Barnacules",False);
+			20:	BBC_Textmode::print_string("@electron_greg",False);
+			21:	BBC_Textmode::print_string("@JCTrick",False);
+			22:	BBC_Textmode::print_string("@joeltelling",False);
+			23:	BBC_Textmode::print_string("@JAYTEEAU",False);
+			24:	BBC_Textmode::print_string("@Lord_Arse",False);
+			25:	BBC_Textmode::print_string("@BreakIntoProg",False);
+			26:	BBC_Textmode::print_string("@leelegionsmith",False);
+			27:	BBC_Textmode::print_string("@particlesbbs",False);
+			28:	BBC_Textmode::print_string("@DeathStarPR",False);
+			29:	BBC_Textmode::print_string("@kcimc",False);
+			30:	BBC_Textmode::print_string("@susie_dent",False);
+			31:	BBC_Textmode::print_string("@FriendlyWire",False);
+			32:	BBC_Textmode::print_string("@Foone",False);
+			33:	BBC_Textmode::print_string("@8bit_era",False);
+			34:	BBC_Textmode::print_string("@TheReaperUK",False);
+			35:	BBC_Textmode::print_string("@drkninja2k5",False);
+			36:	BBC_Textmode::print_string("@setlahs",False);
+			37:	BBC_Textmode::print_string("@ZZleeZZ",False);
+			38:	BBC_Textmode::print_string("@8bitAlan",False);
+			39:	BBC_Textmode::print_string("@news_xc",False);
+			40:	BBC_Textmode::print_string("@SharpworksMZ",False);
+			41:	BBC_Textmode::print_string("@_fabdigital_",False);
+			42:	BBC_Textmode::print_string("@AshtonNorman6",False);
+			43:	BBC_Textmode::print_string("@textfiles",False);
+			44:	BBC_Textmode::print_string("@maded2",False);
+			45:	BBC_Textmode::print_string("@KevEdwardsRetro",False);
+			46:	BBC_Textmode::print_string("@ghidraninja",False);
+			47:	BBC_Textmode::print_string("@chrispian",False);
+			48:	BBC_Textmode::print_string("@DocPop",False);
 		end;
 		
 		fori w:=1 to 7 do
 		begin
-			wait_vsync();
+			BBC_Textmode::wait_vsync();
 		end;
 	end;
 

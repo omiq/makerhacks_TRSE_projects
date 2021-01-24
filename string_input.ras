@@ -1,32 +1,31 @@
 program String_Input;
+
 var
+@use "textmode"
+
 	reply_pointer: pointer;
-
-@include "beeb_constants.ras"
-
-@include "textmode.ras"
 
 begin
 
 	// Set screen to mode 1 and red text
-	mode_1();
-	cls();
-	red();
-	print_string("Press a key ...", True);
-	wait_key();
+	BBC_Textmode::mode_1();
+	BBC_Textmode::cls();
+	BBC_Textmode::red();
+	BBC_Textmode::print_string("Press a key ...", True);
+	BBC_Textmode::wait_key();
 	
 	// Clear screen and show question in yellow
-	cls();
-	yellow();
-	print_string("What is your name?", True);		
-	print_string("> ", False);
+	BBC_Textmode::cls();
+	BBC_Textmode::yellow();
+	BBC_Textmode::print_string("What is your name?", True);		
+	BBC_Textmode::print_string("> ", False);
 	
 	// can't return string so return pointer to a string
-	reply_pointer:=get_string();
+	reply_pointer:=BBC_Textmode::get_string();
 	
 	// Output result:
-	print_string("Hello ", False);
-	print_string(reply_pointer, True);	
-	beep();
+	BBC_Textmode::print_string("Hello ", False);
+	BBC_Textmode::print_string(reply_pointer, True);	
+	BBC_Textmode::beep();
 
 end.

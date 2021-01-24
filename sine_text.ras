@@ -1,33 +1,30 @@
 program Hello_World_Sine;
 var
+@use "textmode"
 
 	// Define variables : position x, position y, time and a counter i
    x,y,old_x,old_y,time,i: byte = 0;  
-
-@include "beeb_constants.ras"
-
-@include "textmode.ras"
 	
 
 begin	
 
 	// Set to 80 column mode
-	screen_mode(0);					
+	BBC_Textmode::screen_mode(0);					
 
 	
 	// Clear acreen
-	cls();						
+	BBC_Textmode::cls();						
 	
 	// No flashing cursor
-	cursor_off();
+	BBC_Textmode::cursor_off();
 
 	// infinite loop
 	while (true) do
 	begin
 		for i:=0 to 200 do wait(20);
 
-		move_to(old_x,old_y);		
-		print_string("            ",False);
+		BBC_Textmode::move_to(old_x,old_y);		
+		BBC_Textmode::print_string("            ",False);
 
 		// Calculate x,y some sine values (making a circle)
 		// if sine[x] then sine[x+64] is equal to cosine 
@@ -37,19 +34,19 @@ begin
 		y:=sine[time+64]/16 + 4;		
 		
 		// move cursor to x,y 
-		move_to(x,y);
+		BBC_Textmode::move_to(x,y);
 		
 		i:=time/64; // i will now have values between 0 and 3 (since time is between 0 and 255)
 		// Print some random string
 		case i of
-			0:	print_string("I AM FISH",False);
-			1:	print_string("ARE YOU FISH",False);
-			2:	print_string("ME AM CAT",False);
-			3:	print_string("OM NOM NOM",False);
+			0:	BBC_Textmode::print_string("I AM FISH",False);
+			1:	BBC_Textmode::print_string("ARE YOU FISH",False);
+			2:	BBC_Textmode::print_string("ME AM CAT",False);
+			3:	BBC_Textmode::print_string("OM NOM NOM",False);
 		end;
 		// Increase the timer
 		time:=time+1;
-		wait_vsync();
+		BBC_Textmode::wait_vsync();
 	end;
 
 end.

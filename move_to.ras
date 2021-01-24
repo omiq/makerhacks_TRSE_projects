@@ -1,27 +1,25 @@
 program move_to;
 var
 
-@include "beeb_constants.ras"
-
-@include "textmode.ras"
+@use "textmode"
 	
 
 begin
 
 	// Clear acreen
-	cls();							
+	BBC_Textmode::cls();							
 	
 	// Set to 4x colour screen mode, 40x25
-	screen_mode(1);					
+	BBC_Textmode::screen_mode(1);					
 
 	// Yellow
-	text_colour(2);		
+	BBC_Textmode::text_colour(2);		
 
 	// Move to 20,20 char location on screen
-	move_to(20,20);
+	BBC_Textmode::move_to(20,20);
 	
 	// Print with no return			
-	print_string("Hello BBC Micro! ", False);		
+	BBC_Textmode::print_string("Hello BBC Micro! ", False);		
 		
 	
 end.

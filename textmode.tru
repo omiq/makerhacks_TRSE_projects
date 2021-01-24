@@ -1,5 +1,4 @@
 unit BBC_Textmode;
-
 var
 	// Address Locations of operating system functions
 	const	OSBYTE: address =  $FFF4; // Entry point for OSBYTE http://beebwiki.mdfs.net/OSBYTE
@@ -12,156 +11,159 @@ var
 	const	CUR_OF: address =  $FE01; // Cursor off
 
 
-procedure cls();
-begin
-	_A:=12;
-	call(OSWRCH);
-	_A:=30;
-	call(OSWRCH);
-end;	
-
-procedure move_to(_text_x: byte, _text_y: byte);
-begin
-	_A:=31;
-	call(OSWRCH);
-	_A:=_text_x;
-	call(OSWRCH);
-	_A:=_text_y;
-	call(OSWRCH);
-end;	
-
-
-procedure wait_vsync();
-begin
-	_A:=19;
-	call(OSBYTE);
-end;
-
-procedure screen_mode(selected_mode:byte);
-begin
-
-	_A:=22;
-	call(OSWRCH);
-	_A:=selected_mode"); // Again, need to replace with a mode param
-	call(OSWRCH);
-	
-end;
-
-procedure mode_1();
-begin
-
-	screen_mode(1);
-	
-end;
-
-procedure red();
-begin
-	_A:=17;
-	call(OSWRCH);
-	_A:=1;	// should use _chosen_text_colour but that doesn't work
-	call(OSWRCH);
-end;	
-
-procedure yellow();
-begin
-	_A:=17;
-	call(OSWRCH);
-	_A:=2;	// should use _chosen_text_colour but that doesn't work
-	call(OSWRCH);
-end;	
-
-procedure text_colour(_chosen_text_colour: byte);
-begin
-	_A:=17;
-	call(OSWRCH);
-	_A:=_chosen_text_colour;	// should use _chosen_text_colour but that doesn't work
-	call(OSWRCH);
-end;	
-
-procedure print_string(in_str: pointer, CRLF: byte = True);
-var
-  	ch: 		byte;
-  	next_ch:	byte;
-
-begin
-
-  	next_ch:= 0;
-
-	while(in_str[next_ch]) do
+	procedure cls();
 	begin
-		ch:=in_str[next_ch];
-		_A:=ch");
+		_A:=12;
 		call(OSWRCH);
-		inc(next_ch);
-	end;
-	
-	if(CRLF) then call(OSNEWL);
-end;
-
-
-procedure get_ch(show_ch: byte = False);
-begin
-
-	_X:=1;
-	_A:=15;
-	call(OSBYTE);
-	call(OSRDCH);
-	call(OSWRCH);
-end;	
-
-function get_string(): integer;
-var
-	this_ch, buffer_counter: byte;
-	
-	//    temporary uuntil figure out returning strings from functions	
-	str_buffer: array[40] of byte;
-	str_pointer: pointer;
-
-begin
-	this_ch:=0;
-	buffer_counter:=0;
-	str_pointer:=#str_buffer;
-	fillfast(str_pointer,65,40);
-
-	while (this_ch<>13 and buffer_counter < 40) do
-	begin
-		this_ch:=get_ch(True);
-		str_buffer[buffer_counter]:=this_ch;
-		inc(buffer_counter);
-	end;
-	
-	// Using an array so needs a 0		
-	str_buffer[buffer_counter]:=0;
-	str_pointer:=#str_buffer;
-	get_string:=str_pointer;
-end;
-
-procedure wait_key();
-begin
-	while(get_ch(False)=0) do
-	begin
-		//
+		_A:=30;
+		call(OSWRCH);
 	end;	
-end;
 
-procedure beep();
-var
-	beep_string:string=(7,0);
-begin
-	print_string(#beep_string,True);
-end;	
+	procedure move_to(_text_x: byte, _text_y: byte);
+	begin
+		_A:=31;
+		call(OSWRCH);
+		_A:=_text_x;
+		call(OSWRCH);
+		_A:=_text_y;
+		call(OSWRCH);
+	end;	
 
-//CURSOR_OFF
-procedure cursor_off();
-var
 
-begin
+	procedure wait_vsync();
+	begin
+		_A:=19;
+		call(OSBYTE);
+	end;
 
-	_A:=10;			// Cursor start line and blink type
-	asm(" STA CRTC_V");
-	_A:=32;
-	asm(" STA CUR_OF");
-	
-end;
+	procedure screen_mode(selected_mode:byte);
+	begin
+
+		_A:=22;
+		call(OSWRCH);
+		_A:=selected_mode; // Again, need to replace with a mode param
+		call(OSWRCH);
+
+	end;
+
+	procedure mode_1();
+	begin
+
+		screen_mode(1);
+
+	end;
+
+	procedure red();
+	begin
+		_A:=17;
+		call(OSWRCH);
+		_A:=1;			// should use _chosen_text_colour but that doesn't work
+		call(OSWRCH);
+	end;	
+
+	procedure yellow();
+	begin
+		_A:=17;
+		call(OSWRCH);
+		_A:=2;			// should use _chosen_text_colour but that doesn't work
+		call(OSWRCH);
+	end;	
+
+	procedure text_colour(_chosen_text_colour: byte);
+	begin
+		_A:=17;
+		call(OSWRCH);
+		_A:=_chosen_text_colour;	// should use _chosen_text_colour but that doesn't work
+		call(OSWRCH);
+	end;	
+
+	procedure print_string(in_str: pointer, CRLF: byte = True);
+	var
+	  	ch: 		byte;
+	  	next_ch:	byte;
+
+	begin
+
+	  	next_ch:= 0;
+
+		while(in_str[next_ch]) do
+		begin
+			ch:=in_str[next_ch];
+			_A:=ch;
+			call(OSWRCH);
+			inc(next_ch);
+		end;
+
+		if(CRLF) then call(OSNEWL);
+	end;
+
+
+	procedure get_ch(show_ch: byte = False);
+	begin
+
+		_X:=1;
+		_A:=15;
+		call(OSBYTE);
+		call(OSRDCH);
+		call(OSWRCH);
+	end;	
+
+	function get_string(): integer;
+	var
+		this_ch, buffer_counter: byte;
+
+		//    temporary uuntil figure out returning strings from functions	
+		str_buffer: array[40] of byte;
+		str_pointer: pointer;
+
+	begin
+		this_ch:=0;
+		buffer_counter:=0;
+		str_pointer:=#str_buffer;
+		fillfast(str_pointer,65,40);
+
+		while (this_ch<>13 and buffer_counter < 40) do
+		begin
+			this_ch:=get_ch(True);
+			str_buffer[buffer_counter]:=this_ch;
+			inc(buffer_counter);
+		end;
+
+		// Using an array so needs a 0		
+		str_buffer[buffer_counter]:=0;
+		str_pointer:=#str_buffer;
+		get_string:=str_pointer;
+	end;
+
+	procedure wait_key();
+	begin
+		while(get_ch(False)=0) do
+		begin
+			//
+		end;	
+	end;
+
+	procedure beep();
+	var
+		beep_string:string=(7,0);
+	begin
+		print_string(#beep_string,True);
+	end;	
+
+	//CURSOR_OFF
+	procedure cursor_off();
+	var
+
+	begin
+/*
+		_A:=10;				// Cursor start line and blink type
+		asm(" STA CRTC_V");
+		_A:=32;
+		asm(" STA CUR_OF");
+*/
+poke(CRTC_V,0,10);
+poke(CUR_OF,0,32);
+
+	end;
 
 end.

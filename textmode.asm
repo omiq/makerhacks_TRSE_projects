@@ -2,10 +2,8 @@
 	org $1100
 	; Starting new memory block at $1100
 StartBlock1100
-	; LineNumber: 8
+	; LineNumber: 168
 	jmp block1
-	; LineNumber: 6
-reply_pointer	= $02
 	
 ; // Address Locations of operating system functions
 ; // Entry point for OSBYTE http:
@@ -41,12 +39,63 @@ BBC_Textmode_cls
 	; LineNumber: 20
 	rts
 	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_move_to
+	;    Procedure type : User-defined procedure
+	; LineNumber: 23
+	; LineNumber: 22
+BBC_Textmode__text_x	dc.b	0
+	; LineNumber: 22
+BBC_Textmode__text_y	dc.b	0
+BBC_Textmode_move_to_block3
+BBC_Textmode_move_to
+	; LineNumber: 24
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$1f
+	; Calling storevariable
+	sta $0
+	; LineNumber: 25
+	jsr $ffee
+	; LineNumber: 26
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__text_x
+	; Calling storevariable
+	sta $0
+	; LineNumber: 27
+	jsr $ffee
+	; LineNumber: 28
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__text_y
+	; Calling storevariable
+	sta $0
+	; LineNumber: 29
+	jsr $ffee
+	; LineNumber: 30
+	rts
+	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_wait_vsync
+	;    Procedure type : User-defined procedure
+	; LineNumber: 34
+BBC_Textmode_wait_vsync
+	; LineNumber: 35
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$13
+	; Calling storevariable
+	sta $0
+	; LineNumber: 36
+	jsr $fff4
+	; LineNumber: 37
+	rts
+	; NodeProcedureDecl -1
 	; ***********  Defining procedure : BBC_Textmode_screen_mode
 	;    Procedure type : User-defined procedure
 	; LineNumber: 40
 	; LineNumber: 39
 BBC_Textmode_selected_mode	dc.b	0
-BBC_Textmode_screen_mode_block3
+BBC_Textmode_screen_mode_block5
 BBC_Textmode_screen_mode
 	; LineNumber: 42
 	; Assigning memory location
@@ -132,6 +181,34 @@ BBC_Textmode_yellow
 	; LineNumber: 70
 	rts
 	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_text_colour
+	;    Procedure type : User-defined procedure
+	; LineNumber: 73
+	; LineNumber: 72
+BBC_Textmode__chosen_text_colour	dc.b	0
+BBC_Textmode_text_colour_block9
+BBC_Textmode_text_colour
+	; LineNumber: 74
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$11
+	; Calling storevariable
+	sta $0
+	; LineNumber: 75
+	jsr $ffee
+	; LineNumber: 76
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__chosen_text_colour
+	; Calling storevariable
+	sta $0
+	; LineNumber: 77
+	
+; // should use _chosen_text_colour but that doesn't work
+	jsr $ffee
+	; LineNumber: 78
+	rts
+	; NodeProcedureDecl -1
 	; ***********  Defining procedure : BBC_Textmode_print_string
 	;    Procedure type : User-defined procedure
 	; LineNumber: 85
@@ -140,10 +217,10 @@ BBC_Textmode_ch	dc.b	0
 	; LineNumber: 83
 BBC_Textmode_next_ch	dc.b	0
 	; LineNumber: 80
-BBC_Textmode_in_str	= $04
+BBC_Textmode_in_str	= $02
 	; LineNumber: 80
 BBC_Textmode_CRLF	dc.b	$01
-BBC_Textmode_print_string_block7
+BBC_Textmode_print_string_block10
 BBC_Textmode_print_string
 	; LineNumber: 87
 	; Assigning single variable : BBC_Textmode_next_ch
@@ -151,16 +228,16 @@ BBC_Textmode_print_string
 	; Calling storevariable
 	sta BBC_Textmode_next_ch
 	; LineNumber: 89
-BBC_Textmode_print_string_while8
-BBC_Textmode_print_string_loopstart12
+BBC_Textmode_print_string_while11
+BBC_Textmode_print_string_loopstart15
 	; Binary clause Simplified: NOTEQUALS
 	; Load pointer array
 	ldy BBC_Textmode_next_ch
 	lda (BBC_Textmode_in_str),y
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq BBC_Textmode_print_string_elsedoneblock11
-BBC_Textmode_print_string_ConditionalTrueBlock9: ;Main true block ;keep 
+	beq BBC_Textmode_print_string_elsedoneblock14
+BBC_Textmode_print_string_ConditionalTrueBlock12: ;Main true block ;keep 
 	; LineNumber: 90
 	; LineNumber: 91
 	; Assigning single variable : BBC_Textmode_ch
@@ -179,19 +256,19 @@ BBC_Textmode_print_string_ConditionalTrueBlock9: ;Main true block ;keep
 	; LineNumber: 94
 	inc BBC_Textmode_next_ch
 	; LineNumber: 95
-	jmp BBC_Textmode_print_string_while8
-BBC_Textmode_print_string_elsedoneblock11
-BBC_Textmode_print_string_loopend13
+	jmp BBC_Textmode_print_string_while11
+BBC_Textmode_print_string_elsedoneblock14
+BBC_Textmode_print_string_loopend16
 	; LineNumber: 97
 	; Binary clause Simplified: NOTEQUALS
 	lda BBC_Textmode_CRLF
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq BBC_Textmode_print_string_elsedoneblock21
-BBC_Textmode_print_string_ConditionalTrueBlock19: ;Main true block ;keep 
+	beq BBC_Textmode_print_string_elsedoneblock24
+BBC_Textmode_print_string_ConditionalTrueBlock22: ;Main true block ;keep 
 	; LineNumber: 96
 	jsr $ffe7
-BBC_Textmode_print_string_elsedoneblock21
+BBC_Textmode_print_string_elsedoneblock24
 	; LineNumber: 98
 	rts
 	; NodeProcedureDecl -1
@@ -200,7 +277,7 @@ BBC_Textmode_print_string_elsedoneblock21
 	; LineNumber: 102
 	; LineNumber: 101
 BBC_Textmode_show_ch	dc.b	$00
-BBC_Textmode_get_ch_block24
+BBC_Textmode_get_ch_block27
 BBC_Textmode_get_ch
 	; LineNumber: 104
 	; Assigning memory location
@@ -234,8 +311,8 @@ BBC_Textmode_buffer_counter	dc.b	0
 BBC_Textmode_str_buffer	dc.b	 
 	org BBC_Textmode_str_buffer+40
 	; LineNumber: 117
-BBC_Textmode_str_pointer	= $04
-BBC_Textmode_get_string_block25
+BBC_Textmode_str_pointer	= $02
+BBC_Textmode_get_string_block28
 BBC_Textmode_get_string
 	; LineNumber: 120
 	
@@ -257,26 +334,26 @@ BBC_Textmode_get_string
 	; LineNumber: 123
 	ldy #$28 ; optimized, look out for bugs
 	lda #$41
-BBC_Textmode_get_string_fill26
+BBC_Textmode_get_string_fill29
 	sta (BBC_Textmode_str_pointer),y
 	dey
-	bpl BBC_Textmode_get_string_fill26
+	bpl BBC_Textmode_get_string_fill29
 	; LineNumber: 125
-BBC_Textmode_get_string_while27
-BBC_Textmode_get_string_loopstart31
+BBC_Textmode_get_string_while30
+BBC_Textmode_get_string_loopstart34
 	; Binary clause Simplified: NOTEQUALS
 	lda BBC_Textmode_this_ch
 	; Compare with pure num / var optimization
 	cmp #$d;keep
-	beq BBC_Textmode_get_string_elsedoneblock30
-BBC_Textmode_get_string_localsuccess35: ;keep
+	beq BBC_Textmode_get_string_elsedoneblock33
+BBC_Textmode_get_string_localsuccess38: ;keep
 	; ; logical AND, second requirement
 	; Binary clause Simplified: LESS
 	lda BBC_Textmode_buffer_counter
 	; Compare with pure num / var optimization
 	cmp #$28;keep
-	bcs BBC_Textmode_get_string_elsedoneblock30
-BBC_Textmode_get_string_ConditionalTrueBlock28: ;Main true block ;keep 
+	bcs BBC_Textmode_get_string_elsedoneblock33
+BBC_Textmode_get_string_ConditionalTrueBlock31: ;Main true block ;keep 
 	; LineNumber: 126
 	; LineNumber: 127
 	; Assigning single variable : BBC_Textmode_this_ch
@@ -295,9 +372,9 @@ BBC_Textmode_get_string_ConditionalTrueBlock28: ;Main true block ;keep
 	; LineNumber: 129
 	inc BBC_Textmode_buffer_counter
 	; LineNumber: 130
-	jmp BBC_Textmode_get_string_while27
-BBC_Textmode_get_string_elsedoneblock30
-BBC_Textmode_get_string_loopend32
+	jmp BBC_Textmode_get_string_while30
+BBC_Textmode_get_string_elsedoneblock33
+BBC_Textmode_get_string_loopend35
 	; LineNumber: 133
 	
 ; // Using an array so needs a 0		
@@ -323,8 +400,8 @@ BBC_Textmode_get_string_loopend32
 	; LineNumber: 139
 BBC_Textmode_wait_key
 	; LineNumber: 140
-BBC_Textmode_wait_key_while39
-BBC_Textmode_wait_key_loopstart43
+BBC_Textmode_wait_key_while42
+BBC_Textmode_wait_key_loopstart46
 	; Binary clause Simplified: EQUALS
 	; Assigning single variable : BBC_Textmode_show_ch
 	lda BBC_Textmode_str_pointer#$0
@@ -333,13 +410,13 @@ BBC_Textmode_wait_key_loopstart43
 	jsr BBC_Textmode_get_ch
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	bne BBC_Textmode_wait_key_elsedoneblock42
-BBC_Textmode_wait_key_ConditionalTrueBlock40: ;Main true block ;keep 
+	bne BBC_Textmode_wait_key_elsedoneblock45
+BBC_Textmode_wait_key_ConditionalTrueBlock43: ;Main true block ;keep 
 	; LineNumber: 141
 	; LineNumber: 143
-	jmp BBC_Textmode_wait_key_while39
-BBC_Textmode_wait_key_elsedoneblock42
-BBC_Textmode_wait_key_loopend44
+	jmp BBC_Textmode_wait_key_while42
+BBC_Textmode_wait_key_elsedoneblock45
+BBC_Textmode_wait_key_loopend47
 	; LineNumber: 144
 	rts
 	; NodeProcedureDecl -1
@@ -350,7 +427,7 @@ BBC_Textmode_wait_key_loopend44
 BBC_Textmode_beep_string		dc.b	7
 	dc.b	0
 	dc.b	0
-BBC_Textmode_beep_block47
+BBC_Textmode_beep_block50
 BBC_Textmode_beep
 	; LineNumber: 150
 	; Assigning single variable : BBC_Textmode_in_str
@@ -365,94 +442,33 @@ BBC_Textmode_beep
 	jsr BBC_Textmode_print_string
 	; LineNumber: 151
 	rts
+	
+; //CURSOR_OFF
+	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_cursor_off
+	;    Procedure type : User-defined procedure
+	; LineNumber: 157
+BBC_Textmode_cursor_off
+	; LineNumber: 164
+	
+; //		_A:=10;				
+; // Cursor start line and blink type
+; //		asm(" STA CRTC_V");
+; //		_A:=32;
+; //		asm(" STA CUR_OF");
+; //
+	; Poke
+	; Optimization: shift is zero
+	lda #$a
+	sta $fe00
+	; LineNumber: 165
+	; Poke
+	; Optimization: shift is zero
+	lda #$20
+	sta $fe01
+	; LineNumber: 167
+	rts
 block1
-	; LineNumber: 11
-	
-; // Set screen to mode 1 and red text
-	jsr BBC_Textmode_mode_1
-	; LineNumber: 12
-	jsr BBC_Textmode_cls
-	; LineNumber: 13
-	jsr BBC_Textmode_red
-	; LineNumber: 14
-	; Assigning single variable : BBC_Textmode_in_str
-	lda #<MainProgram_stringassignstr48
-	sta BBC_Textmode_in_str
-	lda #>MainProgram_stringassignstr48
-	sta BBC_Textmode_in_str+1
-	; Assigning single variable : BBC_Textmode_CRLF
-	lda #$1
-	; Calling storevariable
-	sta BBC_Textmode_CRLF
-	jsr BBC_Textmode_print_string
-	; LineNumber: 15
-	jsr BBC_Textmode_wait_key
-	; LineNumber: 18
-	
-; // Clear screen and show question in yellow
-	jsr BBC_Textmode_cls
-	; LineNumber: 19
-	jsr BBC_Textmode_yellow
-	; LineNumber: 20
-	; Assigning single variable : BBC_Textmode_in_str
-	lda #<MainProgram_stringassignstr50
-	sta BBC_Textmode_in_str
-	lda #>MainProgram_stringassignstr50
-	sta BBC_Textmode_in_str+1
-	; Assigning single variable : BBC_Textmode_CRLF
-	lda #$1
-	; Calling storevariable
-	sta BBC_Textmode_CRLF
-	jsr BBC_Textmode_print_string
-	; LineNumber: 21
-	; Assigning single variable : BBC_Textmode_in_str
-	lda #<MainProgram_stringassignstr52
-	sta BBC_Textmode_in_str
-	lda #>MainProgram_stringassignstr52
-	sta BBC_Textmode_in_str+1
-	; Assigning single variable : BBC_Textmode_CRLF
-	lda #$0
-	; Calling storevariable
-	sta BBC_Textmode_CRLF
-	jsr BBC_Textmode_print_string
-	; LineNumber: 24
-	
-; // can't return string so return pointer to a string
-	; Assigning single variable : reply_pointer
-	jsr BBC_Textmode_get_string
-	sta reply_pointer
-	sty reply_pointer+1
-	; LineNumber: 27
-	
-; // Output result:
-	; Assigning single variable : BBC_Textmode_in_str
-	lda #<MainProgram_stringassignstr54
-	sta BBC_Textmode_in_str
-	lda #>MainProgram_stringassignstr54
-	sta BBC_Textmode_in_str+1
-	; Assigning single variable : BBC_Textmode_CRLF
-	lda #$0
-	; Calling storevariable
-	sta BBC_Textmode_CRLF
-	jsr BBC_Textmode_print_string
-	; LineNumber: 28
-	; Assigning single variable : BBC_Textmode_in_str
-	lda reply_pointer
-	ldx reply_pointer+1
-	sta BBC_Textmode_in_str
-	stx BBC_Textmode_in_str+1
-	; Assigning single variable : BBC_Textmode_CRLF
-	lda #$1
-	; Calling storevariable
-	sta BBC_Textmode_CRLF
-	jsr BBC_Textmode_print_string
-	; LineNumber: 29
-	jsr BBC_Textmode_beep
-	; LineNumber: 31
 	; End of program
 	; Ending memory block
 EndBlock1100
-MainProgram_stringassignstr48	.dc "Press a key ...",0
-MainProgram_stringassignstr50	.dc "What is your name?",0
-MainProgram_stringassignstr52	.dc "> ",0
-MainProgram_stringassignstr54	.dc "Hello ",0

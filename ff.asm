@@ -2,15 +2,15 @@
 	org $1100
 	; Starting new memory block at $1100
 StartBlock1100
-	; LineNumber: 184
+	; LineNumber: 8
 	jmp block1
-	; LineNumber: 3
+	; LineNumber: 5
 i	dc.b	$00
-	; LineNumber: 3
+	; LineNumber: 5
 x	dc.b	$00
-	; LineNumber: 3
+	; LineNumber: 5
 y	dc.b	$00
-	; LineNumber: 3
+	; LineNumber: 5
 w	dc.b	$00
 	; NodeProcedureDecl -1
 	; ***********  Defining procedure : init16x8div
@@ -87,229 +87,243 @@ initrandom256_RandomSkip2
 ; // screen mode register 
 ; // Read Character
 ; // Cursor off
-; //unit BBC_Textmode;
-; //
-; //var
-; //	
-; // Address Locations of operating system functions
-; //	const	OSBYTE: address =  $FFF4; 
-; // Entry point for OSBYTE http:
-; //beebwiki.mdfs.net/OSBYTE
-; //	const 	OSWRCH: address =  $FFEE; 
-; // Print the char in accumulator 
-; //	const 	OSNEWL: address =  $FFE7; 
-; // Newline carriage return + new line
-; //	const 	OSASCI: address =  $FFE3; 
-; // Print text + CRNL at ch13 in string
-; //	const	CRTC_V: address =  $FE00; 
-; // Video controller register
-; //	const	SCR_MO: address =  $FE20; 
-; // screen mode register 
-; //	const	OSRDCH: address =  $FFE0; 
-; // Read Character
-; //	const	CUR_OF: address =  $FE01; 
-; // Cursor off
-; //
 	; NodeProcedureDecl -1
-	; ***********  Defining procedure : cls
+	; ***********  Defining procedure : BBC_Textmode_cls
 	;    Procedure type : User-defined procedure
-	; LineNumber: 31
-cls
-	; LineNumber: 32
-	; ****** Inline assembler section
- LDA #12
-	; LineNumber: 33
+	; LineNumber: 15
+BBC_Textmode_cls
+	; LineNumber: 16
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$c
+	; Calling storevariable
+	sta $0
+	; LineNumber: 17
 	jsr $ffee
-	; LineNumber: 34
-	; ****** Inline assembler section
- LDA #30
-	; LineNumber: 35
+	; LineNumber: 18
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$1e
+	; Calling storevariable
+	sta $0
+	; LineNumber: 19
 	jsr $ffee
-	; LineNumber: 36
+	; LineNumber: 20
 	rts
 	; NodeProcedureDecl -1
-	; ***********  Defining procedure : move_to
+	; ***********  Defining procedure : BBC_Textmode_move_to
 	;    Procedure type : User-defined procedure
-	; LineNumber: 39
-	; LineNumber: 38
-_text_x	dc.b	0
-	; LineNumber: 38
-_text_y	dc.b	0
-move_to_block4
-move_to
-	; LineNumber: 40
-	; ****** Inline assembler section
- LDA #31
-	; LineNumber: 41
+	; LineNumber: 23
+	; LineNumber: 22
+BBC_Textmode__text_x	dc.b	0
+	; LineNumber: 22
+BBC_Textmode__text_y	dc.b	0
+BBC_Textmode_move_to_block4
+BBC_Textmode_move_to
+	; LineNumber: 24
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$1f
+	; Calling storevariable
+	sta $0
+	; LineNumber: 25
 	jsr $ffee
+	; LineNumber: 26
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__text_x
+	; Calling storevariable
+	sta $0
+	; LineNumber: 27
+	jsr $ffee
+	; LineNumber: 28
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__text_y
+	; Calling storevariable
+	sta $0
+	; LineNumber: 29
+	jsr $ffee
+	; LineNumber: 30
+	rts
+	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_wait_vsync
+	;    Procedure type : User-defined procedure
+	; LineNumber: 34
+BBC_Textmode_wait_vsync
+	; LineNumber: 35
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$13
+	; Calling storevariable
+	sta $0
+	; LineNumber: 36
+	jsr $fff4
+	; LineNumber: 37
+	rts
+	; NodeProcedureDecl -1
+	; ***********  Defining procedure : BBC_Textmode_screen_mode
+	;    Procedure type : User-defined procedure
+	; LineNumber: 40
+	; LineNumber: 39
+BBC_Textmode_selected_mode	dc.b	0
+BBC_Textmode_screen_mode_block6
+BBC_Textmode_screen_mode
 	; LineNumber: 42
-	; ****** Inline assembler section
- LDA _text_x
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$16
+	; Calling storevariable
+	sta $0
 	; LineNumber: 43
 	jsr $ffee
 	; LineNumber: 44
-	; ****** Inline assembler section
- LDA _text_y
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode_selected_mode
+	; Calling storevariable
+	sta $0
 	; LineNumber: 45
-	jsr $ffee
-	; LineNumber: 46
-	rts
-	; NodeProcedureDecl -1
-	; ***********  Defining procedure : wait_vsync
-	;    Procedure type : User-defined procedure
-	; LineNumber: 50
-wait_vsync
-	; LineNumber: 51
-	; ****** Inline assembler section
- LDA #19
-	; LineNumber: 52
-	jsr $fff4
-	; LineNumber: 53
-	rts
-	; NodeProcedureDecl -1
-	; ***********  Defining procedure : screen_mode
-	;    Procedure type : User-defined procedure
-	; LineNumber: 56
-	; LineNumber: 55
-selected_mode	dc.b	0
-screen_mode_block6
-screen_mode
-	; LineNumber: 58
-	; ****** Inline assembler section
- LDA #22
-	; LineNumber: 59
-	jsr $ffee
-	; LineNumber: 60
-	; ****** Inline assembler section
- LDA selected_mode
-	; LineNumber: 61
 	
 ; // Again, need to replace with a mode param
 	jsr $ffee
-	; LineNumber: 63
+	; LineNumber: 47
 	rts
 	; NodeProcedureDecl -1
-	; ***********  Defining procedure : text_colour
+	; ***********  Defining procedure : BBC_Textmode_text_colour
 	;    Procedure type : User-defined procedure
-	; LineNumber: 89
-	; LineNumber: 88
-_chosen_text_colour	dc.b	0
-text_colour_block7
-text_colour
-	; LineNumber: 90
-	; ****** Inline assembler section
- LDA #17
-	; LineNumber: 91
+	; LineNumber: 73
+	; LineNumber: 72
+BBC_Textmode__chosen_text_colour	dc.b	0
+BBC_Textmode_text_colour_block7
+BBC_Textmode_text_colour
+	; LineNumber: 74
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda #$11
+	; Calling storevariable
+	sta $0
+	; LineNumber: 75
 	jsr $ffee
-	; LineNumber: 92
-	; ****** Inline assembler section
- LDA _chosen_text_colour
-	; LineNumber: 93
+	; LineNumber: 76
+	; Assigning memory location
+	; Assigning single variable : $0
+	lda BBC_Textmode__chosen_text_colour
+	; Calling storevariable
+	sta $0
+	; LineNumber: 77
 	
 ; // should use _chosen_text_colour but that doesn't work
 	jsr $ffee
-	; LineNumber: 94
+	; LineNumber: 78
 	rts
 	; NodeProcedureDecl -1
-	; ***********  Defining procedure : print_string
+	; ***********  Defining procedure : BBC_Textmode_print_string
 	;    Procedure type : User-defined procedure
-	; LineNumber: 101
-	; LineNumber: 98
-ch	dc.b	0
-	; LineNumber: 99
-next_ch	dc.b	0
-	; LineNumber: 96
-in_str	= $02
-	; LineNumber: 96
-CRLF	dc.b	$01
-print_string_block8
-print_string
-	; LineNumber: 103
-	; Assigning single variable : next_ch
+	; LineNumber: 85
+	; LineNumber: 82
+BBC_Textmode_ch	dc.b	0
+	; LineNumber: 83
+BBC_Textmode_next_ch	dc.b	0
+	; LineNumber: 80
+BBC_Textmode_in_str	= $02
+	; LineNumber: 80
+BBC_Textmode_CRLF	dc.b	$01
+BBC_Textmode_print_string_block8
+BBC_Textmode_print_string
+	; LineNumber: 87
+	; Assigning single variable : BBC_Textmode_next_ch
 	lda #$0
 	; Calling storevariable
-	sta next_ch
-	; LineNumber: 105
-print_string_while9
-print_string_loopstart13
+	sta BBC_Textmode_next_ch
+	; LineNumber: 89
+BBC_Textmode_print_string_while9
+BBC_Textmode_print_string_loopstart13
 	; Binary clause Simplified: NOTEQUALS
 	; Load pointer array
-	ldy next_ch
-	lda (in_str),y
+	ldy BBC_Textmode_next_ch
+	lda (BBC_Textmode_in_str),y
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq print_string_elsedoneblock12
-print_string_ConditionalTrueBlock10: ;Main true block ;keep 
-	; LineNumber: 106
-	; LineNumber: 107
-	; Assigning single variable : ch
+	beq BBC_Textmode_print_string_elsedoneblock12
+BBC_Textmode_print_string_ConditionalTrueBlock10: ;Main true block ;keep 
+	; LineNumber: 90
+	; LineNumber: 91
+	; Assigning single variable : BBC_Textmode_ch
 	; Load pointer array
-	ldy next_ch
-	lda (in_str),y
+	ldy BBC_Textmode_next_ch
+	lda (BBC_Textmode_in_str),y
 	; Calling storevariable
-	sta ch
-	; LineNumber: 108
-	; ****** Inline assembler section
-	; LineNumber: 109
+	sta BBC_Textmode_ch
+	; LineNumber: 92
+	; Assigning memory location
+	; Assigning single variable : $0
+	; Calling storevariable
+	sta $0
+	; LineNumber: 93
 	jsr $ffee
-	; LineNumber: 110
-	inc next_ch
-	; LineNumber: 111
-	jmp print_string_while9
-print_string_elsedoneblock12
-print_string_loopend14
-	; LineNumber: 113
+	; LineNumber: 94
+	inc BBC_Textmode_next_ch
+	; LineNumber: 95
+	jmp BBC_Textmode_print_string_while9
+BBC_Textmode_print_string_elsedoneblock12
+BBC_Textmode_print_string_loopend14
+	; LineNumber: 97
 	; Binary clause Simplified: NOTEQUALS
-	lda CRLF
+	lda BBC_Textmode_CRLF
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq print_string_elsedoneblock22
-print_string_ConditionalTrueBlock20: ;Main true block ;keep 
-	; LineNumber: 112
+	beq BBC_Textmode_print_string_elsedoneblock22
+BBC_Textmode_print_string_ConditionalTrueBlock20: ;Main true block ;keep 
+	; LineNumber: 96
 	jsr $ffe7
-print_string_elsedoneblock22
-	; LineNumber: 114
+BBC_Textmode_print_string_elsedoneblock22
+	; LineNumber: 98
 	rts
 	
 ; //CURSOR_OFF
 	; NodeProcedureDecl -1
-	; ***********  Defining procedure : cursor_off
+	; ***********  Defining procedure : BBC_Textmode_cursor_off
 	;    Procedure type : User-defined procedure
-	; LineNumber: 173
-cursor_off
-	; LineNumber: 175
-	; ****** Inline assembler section
- LDA #10
-	; LineNumber: 176
-	; ****** Inline assembler section
- STA CRTC_V
-	; LineNumber: 177
-	; ****** Inline assembler section
- LDA #32
-	; LineNumber: 178
-	; ****** Inline assembler section
- STA CUR_OF
-	; LineNumber: 180
+	; LineNumber: 157
+BBC_Textmode_cursor_off
+	; LineNumber: 164
+	
+; //		_A:=10;				
+; // Cursor start line and blink type
+; //		asm(" STA CRTC_V");
+; //		_A:=32;
+; //		asm(" STA CUR_OF");
+; //
+	; Poke
+	; Optimization: shift is zero
+	lda #$a
+	sta $fe00
+	; LineNumber: 165
+	; Poke
+	; Optimization: shift is zero
+	lda #$20
+	sta $fe01
+	; LineNumber: 167
 	rts
 block1
-	; LineNumber: 186
+	; LineNumber: 10
 	
-; // Cursor start line and blink type
 ; // Set to 20 column, 16 colour mode
-	; Assigning single variable : selected_mode
+	; Assigning single variable : BBC_Textmode_selected_mode
 	lda #$2
 	; Calling storevariable
-	sta selected_mode
-	jsr screen_mode
-	; LineNumber: 189
+	sta BBC_Textmode_selected_mode
+	jsr BBC_Textmode_screen_mode
+	; LineNumber: 13
 	
 ; // Clear acreen
-	jsr cls
-	; LineNumber: 192
+	jsr BBC_Textmode_cls
+	; LineNumber: 16
 	
 ; // No flashing cursor
-	jsr cursor_off
-	; LineNumber: 195
+	jsr BBC_Textmode_cursor_off
+	; LineNumber: 19
 MainProgram_while26
 MainProgram_loopstart30
 	; Binary clause Simplified: NOTEQUALS
@@ -321,21 +335,21 @@ MainProgram_loopstart30
 MainProgram_localfailed244
 	jmp MainProgram_elsedoneblock29
 MainProgram_ConditionalTrueBlock27: ;Main true block ;keep 
-	; LineNumber: 196
-	; LineNumber: 197
+	; LineNumber: 20
+	; LineNumber: 21
 	
 ; // infinite loop
-	; Assigning single variable : in_str
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr246
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr246
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
-	; LineNumber: 198
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
+	; LineNumber: 22
 	inc i
 	lda i
 	cmp #$30 ; keep
@@ -343,18 +357,18 @@ MainProgram_ConditionalTrueBlock27: ;Main true block ;keep
 	lda #$0
 	sta i
 MainProgram_incmax249
-	; LineNumber: 199
-	; Assigning single variable : _chosen_text_colour
+	; LineNumber: 23
+	; Assigning single variable : BBC_Textmode__chosen_text_colour
 	lda i
 	; Calling storevariable
-	sta _chosen_text_colour
-	jsr text_colour
-	; LineNumber: 201
+	sta BBC_Textmode__chosen_text_colour
+	jsr BBC_Textmode_text_colour
+	; LineNumber: 25
 	; Assigning single variable : x
 	lda #$0
 	; Calling storevariable
 	sta x
-	; LineNumber: 202
+	; LineNumber: 26
 	; Assigning single variable : y
 	; Right is PURE NUMERIC : Is word =0
 	; 8 bit div
@@ -366,812 +380,812 @@ MainProgram_incmax249
 	jsr div8x8_procedure
 	; Calling storevariable
 	sta y
-	; LineNumber: 204
-	; Assigning single variable : _text_x
+	; LineNumber: 28
+	; Assigning single variable : BBC_Textmode__text_x
 	lda x
 	; Calling storevariable
-	sta _text_x
-	; Assigning single variable : _text_y
+	sta BBC_Textmode__text_x
+	; Assigning single variable : BBC_Textmode__text_y
 	lda y
 	; Calling storevariable
-	sta _text_y
-	jsr move_to
-	; LineNumber: 205
+	sta BBC_Textmode__text_y
+	jsr BBC_Textmode_move_to
+	; LineNumber: 29
 	lda i
 	cmp #$0 ;keep
 	bne MainProgram_casenext253
-	; LineNumber: 205
-	; Assigning single variable : in_str
+	; LineNumber: 29
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr255
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr255
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext253
 	lda i
 	cmp #$1 ;keep
 	bne MainProgram_casenext257
-	; LineNumber: 206
-	; Assigning single variable : in_str
+	; LineNumber: 30
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr259
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr259
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext257
 	lda i
 	cmp #$2 ;keep
 	bne MainProgram_casenext261
-	; LineNumber: 207
-	; Assigning single variable : in_str
+	; LineNumber: 31
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr263
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr263
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext261
 	lda i
 	cmp #$3 ;keep
 	bne MainProgram_casenext265
-	; LineNumber: 208
-	; Assigning single variable : in_str
+	; LineNumber: 32
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr267
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr267
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext265
 	lda i
 	cmp #$4 ;keep
 	bne MainProgram_casenext269
-	; LineNumber: 209
-	; Assigning single variable : in_str
+	; LineNumber: 33
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr271
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr271
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext269
 	lda i
 	cmp #$5 ;keep
 	bne MainProgram_casenext273
-	; LineNumber: 210
-	; Assigning single variable : in_str
+	; LineNumber: 34
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr275
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr275
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext273
 	lda i
 	cmp #$6 ;keep
 	bne MainProgram_casenext277
-	; LineNumber: 211
-	; Assigning single variable : in_str
+	; LineNumber: 35
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr279
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr279
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext277
 	lda i
 	cmp #$7 ;keep
 	bne MainProgram_casenext281
-	; LineNumber: 212
-	; Assigning single variable : in_str
+	; LineNumber: 36
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr283
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr283
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext281
 	lda i
 	cmp #$8 ;keep
 	bne MainProgram_casenext285
-	; LineNumber: 213
-	; Assigning single variable : in_str
+	; LineNumber: 37
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr287
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr287
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext285
 	lda i
 	cmp #$9 ;keep
 	bne MainProgram_casenext289
-	; LineNumber: 214
-	; Assigning single variable : in_str
+	; LineNumber: 38
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr291
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr291
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext289
 	lda i
 	cmp #$a ;keep
 	bne MainProgram_casenext293
-	; LineNumber: 215
-	; Assigning single variable : in_str
+	; LineNumber: 39
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr295
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr295
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext293
 	lda i
 	cmp #$b ;keep
 	bne MainProgram_casenext297
-	; LineNumber: 216
-	; Assigning single variable : in_str
+	; LineNumber: 40
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr299
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr299
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext297
 	lda i
 	cmp #$c ;keep
 	bne MainProgram_casenext301
-	; LineNumber: 217
-	; Assigning single variable : in_str
+	; LineNumber: 41
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr303
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr303
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext301
 	lda i
 	cmp #$d ;keep
 	bne MainProgram_casenext305
-	; LineNumber: 218
-	; Assigning single variable : in_str
+	; LineNumber: 42
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr307
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr307
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext305
 	lda i
 	cmp #$e ;keep
 	bne MainProgram_casenext309
-	; LineNumber: 219
-	; Assigning single variable : in_str
+	; LineNumber: 43
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr311
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr311
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext309
 	lda i
 	cmp #$f ;keep
 	bne MainProgram_casenext313
-	; LineNumber: 220
-	; Assigning single variable : in_str
+	; LineNumber: 44
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr315
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr315
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext313
 	lda i
 	cmp #$10 ;keep
 	bne MainProgram_casenext317
-	; LineNumber: 221
-	; Assigning single variable : in_str
+	; LineNumber: 45
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr319
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr319
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext317
 	lda i
 	cmp #$11 ;keep
 	bne MainProgram_casenext321
-	; LineNumber: 222
-	; Assigning single variable : in_str
+	; LineNumber: 46
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr323
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr323
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext321
 	lda i
 	cmp #$12 ;keep
 	bne MainProgram_casenext325
-	; LineNumber: 223
-	; Assigning single variable : in_str
+	; LineNumber: 47
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr327
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr327
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext325
 	lda i
 	cmp #$13 ;keep
 	bne MainProgram_casenext329
-	; LineNumber: 224
-	; Assigning single variable : in_str
+	; LineNumber: 48
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr331
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr331
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext329
 	lda i
 	cmp #$14 ;keep
 	bne MainProgram_casenext333
-	; LineNumber: 225
-	; Assigning single variable : in_str
+	; LineNumber: 49
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr335
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr335
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext333
 	lda i
 	cmp #$15 ;keep
 	bne MainProgram_casenext337
-	; LineNumber: 226
-	; Assigning single variable : in_str
+	; LineNumber: 50
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr339
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr339
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext337
 	lda i
 	cmp #$16 ;keep
 	bne MainProgram_casenext341
-	; LineNumber: 227
-	; Assigning single variable : in_str
+	; LineNumber: 51
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr343
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr343
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext341
 	lda i
 	cmp #$17 ;keep
 	bne MainProgram_casenext345
-	; LineNumber: 228
-	; Assigning single variable : in_str
+	; LineNumber: 52
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr347
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr347
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext345
 	lda i
 	cmp #$18 ;keep
 	bne MainProgram_casenext349
-	; LineNumber: 229
-	; Assigning single variable : in_str
+	; LineNumber: 53
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr351
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr351
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext349
 	lda i
 	cmp #$19 ;keep
 	bne MainProgram_casenext353
-	; LineNumber: 230
-	; Assigning single variable : in_str
+	; LineNumber: 54
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr355
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr355
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext353
 	lda i
 	cmp #$1a ;keep
 	bne MainProgram_casenext357
-	; LineNumber: 231
-	; Assigning single variable : in_str
+	; LineNumber: 55
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr359
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr359
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext357
 	lda i
 	cmp #$1b ;keep
 	bne MainProgram_casenext361
-	; LineNumber: 232
-	; Assigning single variable : in_str
+	; LineNumber: 56
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr363
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr363
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext361
 	lda i
 	cmp #$1c ;keep
 	bne MainProgram_casenext365
-	; LineNumber: 233
-	; Assigning single variable : in_str
+	; LineNumber: 57
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr367
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr367
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext365
 	lda i
 	cmp #$1d ;keep
 	bne MainProgram_casenext369
-	; LineNumber: 234
-	; Assigning single variable : in_str
+	; LineNumber: 58
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr371
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr371
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext369
 	lda i
 	cmp #$1e ;keep
 	bne MainProgram_casenext373
-	; LineNumber: 235
-	; Assigning single variable : in_str
+	; LineNumber: 59
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr375
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr375
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext373
 	lda i
 	cmp #$1f ;keep
 	bne MainProgram_casenext377
-	; LineNumber: 236
-	; Assigning single variable : in_str
+	; LineNumber: 60
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr379
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr379
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext377
 	lda i
 	cmp #$20 ;keep
 	bne MainProgram_casenext381
-	; LineNumber: 237
-	; Assigning single variable : in_str
+	; LineNumber: 61
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr383
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr383
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext381
 	lda i
 	cmp #$21 ;keep
 	bne MainProgram_casenext385
-	; LineNumber: 238
-	; Assigning single variable : in_str
+	; LineNumber: 62
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr387
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr387
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext385
 	lda i
 	cmp #$22 ;keep
 	bne MainProgram_casenext389
-	; LineNumber: 239
-	; Assigning single variable : in_str
+	; LineNumber: 63
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr391
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr391
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext389
 	lda i
 	cmp #$23 ;keep
 	bne MainProgram_casenext393
-	; LineNumber: 240
-	; Assigning single variable : in_str
+	; LineNumber: 64
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr395
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr395
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext393
 	lda i
 	cmp #$24 ;keep
 	bne MainProgram_casenext397
-	; LineNumber: 241
-	; Assigning single variable : in_str
+	; LineNumber: 65
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr399
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr399
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext397
 	lda i
 	cmp #$25 ;keep
 	bne MainProgram_casenext401
-	; LineNumber: 242
-	; Assigning single variable : in_str
+	; LineNumber: 66
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr403
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr403
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext401
 	lda i
 	cmp #$26 ;keep
 	bne MainProgram_casenext405
-	; LineNumber: 243
-	; Assigning single variable : in_str
+	; LineNumber: 67
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr407
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr407
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext405
 	lda i
 	cmp #$27 ;keep
 	bne MainProgram_casenext409
-	; LineNumber: 244
-	; Assigning single variable : in_str
+	; LineNumber: 68
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr411
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr411
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext409
 	lda i
 	cmp #$28 ;keep
 	bne MainProgram_casenext413
-	; LineNumber: 245
-	; Assigning single variable : in_str
+	; LineNumber: 69
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr415
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr415
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext413
 	lda i
 	cmp #$29 ;keep
 	bne MainProgram_casenext417
-	; LineNumber: 246
-	; Assigning single variable : in_str
+	; LineNumber: 70
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr419
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr419
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext417
 	lda i
 	cmp #$2a ;keep
 	bne MainProgram_casenext421
-	; LineNumber: 247
-	; Assigning single variable : in_str
+	; LineNumber: 71
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr423
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr423
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext421
 	lda i
 	cmp #$2b ;keep
 	bne MainProgram_casenext425
-	; LineNumber: 248
-	; Assigning single variable : in_str
+	; LineNumber: 72
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr427
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr427
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext425
 	lda i
 	cmp #$2c ;keep
 	bne MainProgram_casenext429
-	; LineNumber: 249
-	; Assigning single variable : in_str
+	; LineNumber: 73
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr431
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr431
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext429
 	lda i
 	cmp #$2d ;keep
 	bne MainProgram_casenext433
-	; LineNumber: 250
-	; Assigning single variable : in_str
+	; LineNumber: 74
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr435
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr435
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext433
 	lda i
 	cmp #$2e ;keep
 	bne MainProgram_casenext437
-	; LineNumber: 251
-	; Assigning single variable : in_str
+	; LineNumber: 75
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr439
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr439
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext437
 	lda i
 	cmp #$2f ;keep
 	bne MainProgram_casenext441
-	; LineNumber: 252
-	; Assigning single variable : in_str
+	; LineNumber: 76
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr443
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr443
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext441
 	lda i
 	cmp #$30 ;keep
 	bne MainProgram_casenext445
-	; LineNumber: 253
-	; Assigning single variable : in_str
+	; LineNumber: 77
+	; Assigning single variable : BBC_Textmode_in_str
 	lda #<MainProgram_stringassignstr447
-	sta in_str
+	sta BBC_Textmode_in_str
 	lda #>MainProgram_stringassignstr447
-	sta in_str+1
-	; Assigning single variable : CRLF
+	sta BBC_Textmode_in_str+1
+	; Assigning single variable : BBC_Textmode_CRLF
 	lda #$0
 	; Calling storevariable
-	sta CRLF
-	jsr print_string
+	sta BBC_Textmode_CRLF
+	jsr BBC_Textmode_print_string
 	jmp MainProgram_caseend252
 MainProgram_casenext445
 MainProgram_caseend252
-	; LineNumber: 261
+	; LineNumber: 85
 	; Assigning single variable : w
 	lda #$1
 	; Calling storevariable
 	sta w
 MainProgram_forloop449
-	; LineNumber: 258
-	; LineNumber: 259
-	jsr wait_vsync
-	; LineNumber: 260
+	; LineNumber: 82
+	; LineNumber: 83
+	jsr BBC_Textmode_wait_vsync
+	; LineNumber: 84
 MainProgram_forloopcounter451
 MainProgram_loopstart452
 	; Compare is onpage
@@ -1182,11 +1196,11 @@ MainProgram_loopstart452
 MainProgram_loopdone456: ;keep
 MainProgram_forloopend450
 MainProgram_loopend453
-	; LineNumber: 261
+	; LineNumber: 85
 	jmp MainProgram_while26
 MainProgram_elsedoneblock29
 MainProgram_loopend31
-	; LineNumber: 263
+	; LineNumber: 87
 	; End of program
 	; Ending memory block
 EndBlock1100
