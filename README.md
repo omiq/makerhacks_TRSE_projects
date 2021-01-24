@@ -6,17 +6,25 @@ usage:
 ```@use textmode```
 
 ### Constants
-OSBYTE: Entry point for OSBYTE http://beebwiki.mdfs.net/OSBYTE
-OSWRCH: Print the char in accumulator 
-OSNEWL: Newline carriage return + new line
-OSASCI: Print text + CRNL at ch13 in string
-CRTC_V: Video controller register
-SCR_MO: screen mode register 
-OSRDCH: Read Character
-CUR_OF: Cursor off
+
+```OSBYTE```: Entry point for OSBYTE http://beebwiki.mdfs.net/OSBYTE
+
+```OSWRCH```: Print the char in accumulator 
+
+```OSNEWL```: Newline carriage return + new line
+
+```OSASCI```: Print text + CRNL at ch13 in string
+
+```CRTC_V```: Video controller register
+
+```SCR_MO```: screen mode register 
+
+```OSRDCH```: Read Character
+
+```CUR_OF```: Cursor off
 
 ### Functions/Procedures
-
+```
 	procedure cls()
 
 	procedure move_to(_text_x: byte, _text_y: byte);
@@ -41,3 +49,4 @@ CUR_OF: Cursor off
 	procedure beep();
 
 	procedure cursor_off();
+```
